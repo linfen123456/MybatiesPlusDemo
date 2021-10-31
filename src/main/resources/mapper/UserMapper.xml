@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.kuaishang.mybatiesplus.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="cn.kuaishang.mybatiesplus.entity.User">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="age" property="age"/>
+        <result column="email" property="email"/>
+        <result column="role_id" property="roleId"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id,name,age,email,role_id
+    </sql>
+
+    <select id="findAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+    </select>
+
+    <select id="queryAllByAgeAndNameAndRoleId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        where
+        age = #{age,jdbcType=NUMERIC}
+        AND name = #{name,jdbcType=VARCHAR}
+        AND roleId = #{roleId,jdbcType=NUMERIC}
+    </select>
+
+
+</mapper>

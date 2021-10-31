@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/mybaties-plus-demo?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: root
+    password: Passw0rd
+
+
+mybatis-plus:
+  mapper-locations: classpath*:mapper/**/*Mapper.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    auto-mapping-behavior: full
+  global-config:
+    db-config:
+      logic-delete-value: 0
+      logic-not-delete-value: 1
+  type-aliases-package: cn.kuaishang.mybatiesplus.entity
+
+logging:
+  level:
+    root: info
+    cn.kuaishang.mybatiesplus: trace

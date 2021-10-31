@@ -16,6 +16,38 @@
 * **内置分页插件：** 基于Mybatis物理分页，开发者无需关心具体操作，配置好插件之后，写分页等同于写基本List查询
 * **内置性能分析插件：** 可输出Sql语句以及其执行时间，建议开发测试时启用该功能，能有效解决慢查询
 * **内置全局拦截插件：** 提供全表 delete 、 update 操作智能分析阻断，预防误操作
+* **支持多种插件：** 乐观锁、多租户、动态表名、防止全表更新或者删除
+
+### 核心功能
+* 提供默认URCD接口（Dao层和Service层）
+* 内置多种主键生成支持
+* 自定义ID生成器（自3.3.0开始,默认使用雪花算法+UUID(不含中划线)）
+* 条件构造器（支持QueryWrapper和LambdaQueryWrapper），提供丰富的条件构造方法，简化代码数据语句编写
+* 支持物理分页，mybatis-plus 自动替你分页
+
+### 扩展功能
+* 逻辑删除
+* 枚举数据库字段映射
+* 字段类型处理器（可以将数据库存个的JSON查询时自动转实体）
+* 通用字段自动填充（如：创建、更新时间或操作人ID或用户名）
+* SQL注入器
+* 执行 SQL 分析打印
+* 数据配置安全保护
+* 多数据源配置切换
+* MybatisX 快速开发插件（用起来比jpa还好用）
+
+### 企业高级的特性（需要购买或者授权）
+* 数据审计（对账）
+* 数据敏感词过滤
+* 数据范围（数据权限）
+* 表结构自动维护
+* 字段数据绑定（字典回写）
+* 字段加密解密
+* 字段脱敏
+* 多数据源分库分表（读写分离）
+* 多数据源动态加载卸载
+* 多数据源事务（ jta atomikos）
+
 
 ## 支持数据库
 * **mysql**，**oracle**，**db2**，**h2**，hsql，sqlite，postgresql，sqlserver，Phoenix，Gauss ，clickhouse，Sybase，OceanBase，Firebird，cubrid，goldilocks，csiidb
@@ -160,6 +192,7 @@ INSERT INTO user (id, name, age, email) VALUES
     </build>
 ```
 
+
 #### 配置
 ##### DataSource Config
 ```
@@ -248,6 +281,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 * [Mapper CRUD 接口](https://mp.baomidou.com/guide/crud-interface.html#mapper-crud-%E6%8E%A5%E5%8F%A3)
 
 * [mapper 层 选装件](https://mp.baomidou.com/guide/crud-interface.html#mapper-%E5%B1%82-%E9%80%89%E8%A3%85%E4%BB%B6)
+
 插入数据
 
 ~~~
@@ -521,8 +555,7 @@ Map<String, Object> getMap(Wrapper<T> queryWrapper);
 | Map<?String, Object> |	columnMap |	表字段 map 对象 |
 | Function<? super Object, V> |	mapper |	转换函数 |
 
-~~~
-~~~
+
 
 查询集合
 ~~~
@@ -541,11 +574,11 @@ List<Map<String, Object>> listMaps(Wrapper<T> queryWrapper);
 // 查询全部记录
 List<Object> listObjs();
 // 查询全部记录
-<V> List<V> listObjs(Function<? super Object, V> mapper);
+ List<V> listObjs(Function<? super Object, V> mapper);
 // 根据 Wrapper 条件，查询全部记录
 List<Object> listObjs(Wrapper<T> queryWrapper);
 // 根据 Wrapper 条件，查询全部记录
-<V> List<V> listObjs(Wrapper<T> queryWrapper, Function<? super Object, V> mapper);
+ List<V> listObjs(Wrapper<T> queryWrapper, Function<? super Object, V> mapper);
 ~~~
 
 | 类型 |	参数名 |	   描述   |

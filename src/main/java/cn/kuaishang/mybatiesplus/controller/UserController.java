@@ -1,6 +1,7 @@
 package cn.kuaishang.mybatiesplus.controller;
 
 import cn.kuaishang.mybatiesplus.entity.User;
+import cn.kuaishang.mybatiesplus.form.PageUserForm;
 import cn.kuaishang.mybatiesplus.form.UserRoleForm;
 import cn.kuaishang.mybatiesplus.service.UserService;
 import cn.kuaishang.mybatiesplus.service.impl.UserServiceImpl;
@@ -36,6 +37,12 @@ public class UserController {
     @RequestMapping("/listByUserAndRole")
     public ResultInfo listByUserAndRole(@RequestBody UserRoleForm userRoleForm) {
         List<User> allUser = userService.queryListByUserAndRole(userRoleForm);
+        return new ResultInfo(Status.SUCCESS.code,allUser);
+    }
+
+    @RequestMapping("/pageFormByUserAndRole")
+    public ResultInfo pageByUser(@RequestBody PageUserForm<User> userPageUserForm) {
+        Page<User> allUser = userService.pageByUser(userPageUserForm);
         return new ResultInfo(Status.SUCCESS.code,allUser);
     }
 }

@@ -1,4 +1,5 @@
 package cn.kuaishang.mybatiesplus.mapper;
+import cn.kuaishang.mybatiesplus.form.PageUserForm;
 import cn.kuaishang.mybatiesplus.form.UserRoleForm;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -25,4 +26,6 @@ public interface UserMapper extends BaseMapper<User> {
     List<User> queryAllByAgeAndNameAndRoleId(@Param("age") Integer age, @Param("name") String name, @Param("roleId") Long roleId);
 
     List<User> queryListByUserAndRole(@Param(Constants.WRAPPER) Wrapper<UserRoleForm> queryWrapper);
+
+    Page<User> pageByUser(@Param("ew") PageUserForm<User> userPageUserForm);
 }

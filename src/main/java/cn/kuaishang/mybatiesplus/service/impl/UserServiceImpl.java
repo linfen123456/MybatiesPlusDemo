@@ -1,6 +1,7 @@
 package cn.kuaishang.mybatiesplus.service.impl;
 
 import cn.kuaishang.mybatiesplus.entity.User;
+import cn.kuaishang.mybatiesplus.form.PageUserForm;
 import cn.kuaishang.mybatiesplus.form.UserRoleForm;
 import cn.kuaishang.mybatiesplus.mapper.UserMapper;
 import cn.kuaishang.mybatiesplus.service.UserService;
@@ -51,4 +52,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         log.info("参数值：[{}]",queryWrapper.getParamNameValuePairs().toString());
         return baseMapper.queryListByUserAndRole(queryWrapper);
     }
+
+    @Override
+    public Page<User> pageByUser(PageUserForm<User> userPageUserForm) {
+        return baseMapper.pageByUser(userPageUserForm);
+    }
+
 }

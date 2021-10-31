@@ -1,7 +1,7 @@
 package cn.kuaishang.mybatiesplus;
 
 import cn.kuaishang.mybatiesplus.entity.User;
-import cn.kuaishang.mybatiesplus.mapper.UserMapper;
+import cn.kuaishang.mybatiesplus.service.UserService;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import org.junit.jupiter.api.Test;
@@ -14,9 +14,8 @@ import org.springframework.boot.test.context.SpringBootTest;
  */
 @SpringBootTest
 public class UpdateWrapperTest {
-
     @Autowired
-    private UserMapper userMapper;
+    private UserService userService;
 
     /**
      * UPDATE user SET age=?, email=? WHERE (name = ?)
@@ -29,11 +28,11 @@ public class UpdateWrapperTest {
         user.setAge(29);
         user.setEmail("test3update@baomidou.com");
 
-        userMapper.update(user,new UpdateWrapper<User>().eq("name","Tom"));
+        userService.update(user,new UpdateWrapper<User>().eq("name","Tom"));
 
         //方式二：
         //不创建User对象
-        userMapper.update(null,new UpdateWrapper<User>()
+        userService.update(null,new UpdateWrapper<User>()
                 .set("age",29).set("email","test3update@baomidou.com").eq("name","Tom"));
 
     }
@@ -50,13 +49,12 @@ public class UpdateWrapperTest {
         user.setAge(29);
         user.setEmail("test3update@baomidou.com");
 
-        userMapper.update(user,new LambdaUpdateWrapper<User>().eq(User::getName,"Tom"));
+        userService.update(user,new LambdaUpdateWrapper<User>().eq(User::getName,"Tom"));
 
         //方式二：
         //不创建User对象
-        userMapper.update(null,new LambdaUpdateWrapper<User>()
+        userService.update(null,new LambdaUpdateWrapper<User>()
                 .set(User::getAge,29).set(User::getEmail,"test3update@baomidou.com").eq(User::getName,"Tom"));
-
     }
 
 
